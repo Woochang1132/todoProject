@@ -6,6 +6,13 @@ export default function AddTodo({onAdd}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if(text.trim().length === 0){
+            return;
+        }
+
+        // 전달받은 pros 함수를 활용해서 component를 사용하는 곳
+        // 변수 업데이트 가능
         onAdd({id: uuid4, text, status : 'active'});
         setText('');
     }
