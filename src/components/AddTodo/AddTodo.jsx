@@ -3,24 +3,22 @@ import {v4 as uuid4} from 'uuid';
 
 export default function AddTodo({onAdd}) {
     const [text, setText] = useState('');
-    const handleChange = (e) => {
-        setText(e.target.value);
-    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(text.trim().length === 0){
-            return;
-        }
-        onAdd({id: uuid4(), text, status: 'active'})
+        onAdd({id: uuid4, text, status : 'active'});
         setText('');
     }
+
+    const handleText = (e) =>
+    setText(e.target.value);
+
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" placeholder='Add Todo'
-            value={text}
-            onChange={handleChange} />
-
-            <button>Add</button>
+            <input type="text" value={text} 
+            placeholder='todoList를 채우세요'
+            onChange={handleText}/>
+        <button>Add</button>
         </form>
     );
 }
