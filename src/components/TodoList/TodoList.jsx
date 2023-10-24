@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import AddTodo from '../AddTodo/AddTodo';
 import Todo from '../Todo/Todo';
 import styles from './TodoList.module.css'
 
 
 export default function TodoList({filter}) {
-    const [todos, setTodo] = useState([
-        {id : '1' , text : "react 공부하기", status : 'active'},
-        {id : '2' , text : "todoList 채우가", status : 'active'},
-        {id : '3' , text : "component 확인", status : 'active'}
-    ]) 
+    const [todos, setTodo] = useState(() => readTodoFromLoaclStorage()); 
+    const handleAdd = ((todo) => {setTodo([...todos, todo])});
 
-    const handleAdd = ((todo) => setTodo([...todos, todo]));
+    useEffect(() => {
+        localStorage.setItem('todos', JSON.stringify(todos)); // 객체를 JSON 형태로 변경해야 한다.
+        console.log("JSON.stringify(todos)", JSON.stringify(todos))
+    }, [todos]);
     const handleUpdate = (updated) =>
     setTodo(todos.map((t) => t.id === updated.id ? updated : t));
 
@@ -38,4 +38,11 @@ function getFilteredItems(todos, filter){
         return todos;
     }
     return todos.filter(todo => todo.status === filter);
+}
+
+function readTodoFromLoaclStorage(){
+    const todos = localStorage.getItem('todos');
+    // console.log(">>>", localStorage.getItem('todos'));
+    // console.log("todos localStorage>>", todos);
+    return todos? JSON.parse(todos) : [];
 }

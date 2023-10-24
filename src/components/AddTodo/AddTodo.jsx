@@ -14,7 +14,7 @@ export default function AddTodo({onAdd}) {
 
         // 전달받은 pros 함수를 활용해서 component를 사용하는 곳
         // 변수 업데이트 가능
-        onAdd({id: uuid4, text, status : 'active'});
+        onAdd({id: uuid4(), text, status : 'active'});
         setText('');
     }
 
