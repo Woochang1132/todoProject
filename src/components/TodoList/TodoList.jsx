@@ -6,11 +6,11 @@ import styles from './TodoList.module.css'
 
 export default function TodoList({filter}) {
     const [todos, setTodo] = useState(() => readTodoFromLoaclStorage()); 
+
     const handleAdd = ((todo) => {setTodo([...todos, todo])});
 
     useEffect(() => {
         localStorage.setItem('todos', JSON.stringify(todos)); // 객체를 JSON 형태로 변경해야 한다.
-        console.log("JSON.stringify(todos)", JSON.stringify(todos))
     }, [todos]);
     const handleUpdate = (updated) =>
     setTodo(todos.map((t) => t.id === updated.id ? updated : t));
@@ -22,11 +22,12 @@ export default function TodoList({filter}) {
         <section className={styles.container}>
             <ul className={styles.list}>
                 {filtered.map((item) =>
-                <Todo key={item.id}
+                <Todo 
+                key={item.id}
                 todo = {item}
                 onUpdate={handleUpdate}
-                onDelete={handleDelete}>
-                </Todo>)}
+                onDelete={handleDelete}
+                />)}
             </ul>
             <AddTodo onAdd={handleAdd}/>
         </section>
@@ -42,7 +43,5 @@ function getFilteredItems(todos, filter){
 
 function readTodoFromLoaclStorage(){
     const todos = localStorage.getItem('todos');
-    // console.log(">>>", localStorage.getItem('todos'));
-    // console.log("todos localStorage>>", todos);
     return todos? JSON.parse(todos) : [];
 }
