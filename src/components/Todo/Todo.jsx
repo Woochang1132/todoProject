@@ -3,7 +3,6 @@ import {FaTrashAlt} from 'react-icons/fa'
 import styles from './Todo.module.css'
 
 export default function Todo({todo, onUpdate, onDelete}) {
-    console.log("Todo 전체 조회 >>", todo)
     const {text, status} = todo;
 
     const handleChange = (e) => {
@@ -12,7 +11,6 @@ export default function Todo({todo, onUpdate, onDelete}) {
     }
 
     const handleDelete = () => {
-        console.log("todo >>>", todo)
         onDelete(todo)
     }
 

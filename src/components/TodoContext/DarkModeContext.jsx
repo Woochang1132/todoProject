@@ -12,10 +12,11 @@ export function DarkMdoeProvider({children}){
 
     useEffect(() => {
         const isDark = 
-        localStorage.theme === 'dark' || (!('theme' in localStorage) && 
+        localStorage.theme === 'dark' || (('theme' in localStorage) && 
         window.matchMedia('(prefers-color-scheme: dark)').matches);
         setDarkMode(isDark);
         updateDarkMdoe(isDark);
+        console.log(('theme' in localStorage))
     },[])
 
     return <DarkModeContext.Provider value={{darkMode, toggleDarkMode}}>

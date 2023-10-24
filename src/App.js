@@ -9,16 +9,14 @@ function App() {
   const [filter, setFilter] = useState(filters[0]);
 
   return (
-    <>
-      <DarkMdoeProvider>
-        <Header
-          filters={filters}
-          filter={filter}
-          onFilterChange={(filter) => setFilter(filter)}
-        />
-        <TodoList filter={filter} />
-      </DarkMdoeProvider>
-    </>
+    <DarkMdoeProvider>
+      <Header
+        filters={filters}
+        filter={filter}
+        onFilterChange={(filter) => setFilter(filter)}
+      />
+      <TodoList filter={filter} />
+    </DarkMdoeProvider>
   );
 }
 
